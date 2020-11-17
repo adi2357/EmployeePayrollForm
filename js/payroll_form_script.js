@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const save = () => {
     try {
         let employeePayrollData = createEmployeePayrollObject();
-        updateLocalStorage(employeePayrollData);
+        if (employeePayrollData != undefined) updateLocalStorage(employeePayrollData);
     } catch (submitError) {
         alert(submitError);
         return;
@@ -176,6 +176,8 @@ function updateLocalStorage(employeePayrollData) {
 
 const resetForm = () => {
     setDefaultValue("#name", "");
+    setDefautlText(".name-error");
+    setDefautlText(".valid-name");
     unsetSelectedValues("[name=profile]");
     unsetSelectedValues("[name=gender]");
     unsetSelectedValues("[name=department]");
@@ -183,6 +185,8 @@ const resetForm = () => {
     setDefaultValue("#day", "1");
     setDefaultValue("#month", "January");
     setDefaultValue("#year", "2020");
+    setDefautlText(".startDate-error");
+    setDefautlText(".valid-startDate");
     setDefaultValue("#notes", "");
 };
 
@@ -201,4 +205,9 @@ const resetRange = (propertyId, outputId) => {
     rangeElement.value = 400000;
     const outputElement = document.querySelector(outputId);
     outputElement.textContent = rangeElement.value;
+};
+
+const setDefautlText = (propertyId) => {
+    const contentElement = document.querySelector(propertyId);
+    contentElement.textContent = "";
 };
